@@ -1,7 +1,7 @@
 /*
- * Tutorial 4 Jeopardy Project for SOFE 3950U / CSCI 3020U: Operating Systems
+ * Tutorial 4 Jeopardy Project for SOFE 3950U
  *
- * Copyright (C) 2015, <GROUP MEMBERS>
+ * Copyright (C) 2021, Nate Grobe, Cole Kahkonen, Kavan Chandra, Krystian Rusin
  * All rights reserved.
  *
  */
@@ -25,6 +25,8 @@ void tokenize(char *input, char **tokens);
 // Displays the game results for each player, their name and final score, ranked from first to last place
 void show_results(player *players, int num_players);
 
+void display_instructions();
+
 
 int main(int argc, char *argv[])
 {
@@ -35,6 +37,7 @@ int main(int argc, char *argv[])
     char buffer[BUFFER_LEN] = { 0 };
 
     // Display the game introduction and initialize the questions
+    display_instructions();
     initialize_game();
 
     // Prompt for players names
@@ -45,10 +48,15 @@ int main(int argc, char *argv[])
     while (fgets(buffer, BUFFER_LEN, stdin) != NULL)
     {
         // Call functions from the questions and players source files
-
         // Execute the game until all questions are answered
-
         // Display the final results and exit
+
+
     }
     return EXIT_SUCCESS;
+}
+
+// write complete instructions here
+void display_instructions() {
+    printf("Instructions:\n");
 }
