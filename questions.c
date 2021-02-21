@@ -134,7 +134,7 @@ void display_question(char *category, int value)
 
 // Returns true if the answer is correct for the question for that category and dollar value
 bool valid_answer(char *category, int value, char *answer) //TODO
-{
+{//nate fix this shit mark question as complete
     return false;
 }
 
