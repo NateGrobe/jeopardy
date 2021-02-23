@@ -133,8 +133,17 @@ void display_question(char *category, int value)
 }
 
 // Returns true if the answer is correct for the question for that category and dollar value
-bool valid_answer(char *category, int value, char *answer) //TODO
-{//nate fix this shit mark question as complete
+bool valid_answer(char *category, int value, char *answer)
+{
+    for(int i = 0; i < NUM_QUESTIONS; i++) {
+        question q = questions[i];
+        if(strstr(category, q.category) && q.value == value) {
+            if(strstr(q.answer, answer)) {
+                q.answered = true;
+                return true;
+            }
+        }
+    }
     return false;
 }
 
@@ -143,9 +152,9 @@ bool already_answered(char *category, int value)
 {
     // lookup the question and see if it's already been marked as answered
     for(int i = 0; i < NUM_QUESTIONS; i++) {
-        if(strstr(category, questions[i].category) && questions[i].value == value) {
-            return questions[i].answered;
+        question q = questions[i];
+        if(strstr(category, q.category) && q.value == value) {
+            return q.answered; 
         }
     }
-    return false;
 }

@@ -116,8 +116,8 @@ int main()
         printf("What is your answer?\n");
         scanf("%s", answer);
 
-        if (valid_answer(category, value, answer))
-        {//nate fix this shit mark question as complete
+        if (valid_answer(category, value, answer) == true)
+        {
             printf("correct");
             update_score(players, NUM_PLAYERS, name, value);
         }
