@@ -9,10 +9,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <time.h>
+#include <ctype.h>
 #include "questions.h"
 #include "players.h"
 #include "jeopardy.h"
-#include <time.h>
 
 // Put macros or constants here using #define
 #define BUFFER_LEN 256
@@ -25,6 +26,8 @@ void tokenize(char *input, char **tokens);
 
 // Displays the game results for each player, their name and final score, ranked from first to last place
 void show_results(player *players, int num_players);
+
+void str_lower_case(char *str);
 
 void display_instructions();
 
@@ -41,38 +44,16 @@ int main()
     display_instructions();
     initialize_game();
 
-    // Prompt for players names
-    char *name = calloc(256, sizeof(char));
-    player pl1;
-    pl1.score = 0;
-    printf("What is the first name?\n");
-    scanf("%s", name);
-    strcpy(pl1.name, name);
-    players[0] =pl1;
-    
-
-    player pl2;
-    pl2.score = 0;
-    printf("What is the second name?\n");
-    scanf("%s", name);
-    strcpy(pl2.name, name);
-    players[1] =pl2;
-
-    player pl3;
-    pl3.score = 0;
-    printf("What is the third name?\n");
-    scanf("%s", name);
-    strcpy(pl3.name, name);
-    players[2] =pl3;
-    
-    player pl4;
-    pl4.score = 0;
-    printf("What is the fourth name?\n");
-    scanf("%s", name);
-    strcpy(pl4.name, name);
-    players[3] =pl4;
-    
-    free(name);
+    // Prompt for players names and append them to an array of players
+    for(int i = 0; i < NUM_PLAYERS; i++) {
+        char *name = calloc(256, sizeof(char));
+        player p;
+        printf("Enter player %d's name: ", i+1);
+        scanf("%s", name);
+        strcpy(p.name, name);
+        players[i] = p;
+        free(name);
+    }
     
     // initialize each of the players in the array
     
@@ -84,7 +65,7 @@ int main()
         display_categories();
 
         char *name = calloc(256, sizeof(char));
-        name = players[rand()%4].name;
+        name = players[rand() % 4].name;
         char *category = calloc(256, sizeof(char));
         int value;
         //Keeps asking for category and value till one that has not been chosen is picked
@@ -92,7 +73,8 @@ int main()
         while (true) {
             printf("What category do you want, %s?\n", name);
             scanf(" %s", category);
-            if(strstr(category, "programming") || strstr(category, "algorithms") ||strstr(category, "databases")){
+            str_lower_case(category);
+            if (strstr(category, "programming") || strstr(category, "algorithms") ||strstr(category, "databases")){
              break;
             }
         }
@@ -112,18 +94,35 @@ int main()
         }
         //shows question and checks for the answer
         display_question(category, value);
-        char *answer = calloc(256, sizeof(char));
-        printf("What is your answer?\n");
-        scanf("%s", answer);
 
-        if (valid_answer(category, value, answer) == true)
+        char *answer = calloc(BUFFER_LEN, sizeof(char));
+        char *cleaned_answer = calloc(BUFFER_LEN, sizeof(char));
+        while (true) {
+            char **tokens = calloc(BUFFER_LEN, sizeof(char*));
+            scanf("\n%[^\n]c", answer);
+            str_lower_case(answer);
+            tokenize(answer, tokens);
+            if ((strstr(tokens[0], "who") || strstr(tokens[0], "what")) && strstr(tokens[1], "is")) {
+                if(strstr(tokens[2], "yes") || strstr(tokens[2], "no")) {
+                    cleaned_answer = tokens[2];
+                    break;
+                } else {
+                    printf("Please answer using yes or no!\n");
+                }
+            } else {
+                printf("Please answer using \"who is\" or \"what is\"!\n");
+            }
+        }
+
+        if (valid_answer(category, value, cleaned_answer))
         {
             printf("correct");
             update_score(players, NUM_PLAYERS, name, value);
         }
         free(answer);
-        //free(name);
+        free(cleaned_answer);
         counter++;
+
         // Call functions from the questions and players source files
         // Execute the game until all questions are answered
         // Display the final results and exit
@@ -140,5 +139,24 @@ int main()
 void display_instructions() {
     printf("Instructions:\n");
     printf("Firstly, enter all 4 players names.\n\nThen enter the category and dollar amount of question.\n\n");
-    printf("Next answer the question with \"yes\" or \"no\".\n\nWhen all questions have been answered the final results will be displayed.\n\n");
+    printf("Next answer the question with \"who is yes\" or \"who is no\". \"What is\" is also accepted.");
+    printf("\n\nWhen all questions have been answered the final results will be displayed.\n\n");
+}
+
+// converts a string to lower case
+void str_lower_case(char *str) {
+    for(int i = 0; str[i] != '\0'; i++) {
+        str[i] = tolower(str[i]);
+    }
+}
+
+// splits input into tokens and appends them to an array
+void tokenize(char *input, char **tokens) {
+    char *token = strtok(input, " ");
+    int c = 0;
+
+    while(token != NULL) {
+        tokens[c++] = token;
+        token = strtok(NULL, " ");
+    }
 }
