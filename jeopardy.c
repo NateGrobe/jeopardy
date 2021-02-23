@@ -116,11 +116,11 @@ int main()
 
         if (valid_answer(category, value, cleaned_answer))
         {
-            printf("correct");
+            printf("Correct!\n");
             update_score(players, NUM_PLAYERS, name, value);
         }
         free(answer);
-        free(cleaned_answer);
+        //free(cleaned_answer);
         counter++;
 
         // Call functions from the questions and players source files
