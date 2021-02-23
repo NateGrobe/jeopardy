@@ -121,14 +121,14 @@ int main()
                 player p = players[i];
                 if(strstr(p.name, name)) {
                     int currentScore = update_score(players, NUM_PLAYERS, name, value);
-                    printf("correct! ", p.name , "'s score is now:" + currentScore);
+                    printf("correct! ", p.name , "'s score is now:" + currentScore ," \n");
                 }
             }
             
             
         }
         free(answer);
-        free(cleaned_answer);
+        //free(cleaned_answer);
         counter++;
 
         // Call functions from the questions and players source files
