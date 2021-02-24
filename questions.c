@@ -124,7 +124,7 @@ void display_categories(void)
         if(questions[i+1].answered) printf("        %s   ", "   ");
         else printf("        %d   ", questions[i+1].value);
 
-        if(questions[i+2].answered) printf("        %s   ", "   ");
+        if(questions[i+2].answered) printf("        %s   \n", "   ");
         else printf("        %d   \n", questions[i+2].value);
     }
 }
