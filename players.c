@@ -11,7 +11,7 @@
 #include "players.h"
 
 // Returns true if the player name matches one of the existing players
-bool player_exists(player *players, int num_players, char *name)//TODO
+bool player_exists(player *players, int num_players, char *name)
 {
     for(int i = 0; i < num_players; i++) {
         player p = players[i];
@@ -24,7 +24,7 @@ bool player_exists(player *players, int num_players, char *name)//TODO
 
 // Go through the list of players and update the score for the 
 // player given their name
-int update_score(player *players, int num_players, char *name, int score)//TODO
+int update_score(player *players, int num_players, char *name, int score)
 {
     for(int i = 0; i < num_players; i++) {
         player p = players[i];

@@ -31,7 +31,6 @@ void str_lower_case(char *str);
 
 void display_instructions();
 
-
 int main()
 {
     // An array of 4 players, may need to be a pointer if you want it set dynamically
@@ -107,6 +106,7 @@ int main()
 
         char *answer = calloc(BUFFER_LEN, sizeof(char));
         char *cleaned_answer = calloc(BUFFER_LEN, sizeof(char));
+
         while (true) {
             char **tokens = calloc(BUFFER_LEN, sizeof(char*));
             scanf("\n%[^\n]c", answer);
@@ -134,8 +134,6 @@ int main()
                     printf("correct! ", p.name , "'s score is now:" + currentScore ," \n");
                 }
             }
-            
-            
         }
 
         free(answer);

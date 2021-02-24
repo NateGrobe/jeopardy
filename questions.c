@@ -117,7 +117,15 @@ void display_categories(void)
     // print categories and dollar values for each unanswered question in questions array
     printf("Algorithms   Programming   Databases\n");
     for(int i = 0; i < NUM_QUESTIONS; i += 3) {
-        printf("   %d           %d          %d\n", questions[i].value, questions[i+1].value, questions[i+2].value);
+        int q1, q2, q3;
+        if(questions[i].answered) printf("   %s   ", "   ");
+        else printf("   %d   ", questions[i].value);
+
+        if(questions[i+1].answered) printf("        %s   ", "   ");
+        else printf("        %d   ", questions[i+1].value);
+
+        if(questions[i+2].answered) printf("        %s   ", "   ");
+        else printf("        %d   \n", questions[i+2].value);
     }
 }
 
@@ -138,9 +146,9 @@ bool valid_answer(char *category, int value, char *answer)
     for(int i = 0; i < NUM_QUESTIONS; i++) {
         question q = questions[i];
         if(strstr(category, q.category) && q.value == value) {
+            q.answered = true;
+            questions[i] = q;
             if(strstr(q.answer, answer)) {
-                q.answered = true;
-                questions[i] = q;
                 return true;
             }
         }
