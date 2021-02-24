@@ -139,21 +139,21 @@ int main()
             free(tokens);
         }
 
-        // print if the answer is correct
+        // print if the answer is correct and display answer if incorrect
         if (valid_answer(category, value, cleaned_answer))
         {
             update_score(players, NUM_PLAYERS, name, value);
             for(int i = 0; i < NUM_PLAYERS; i++) {
                 player p = players[i];
                 if(strstr(p.name, name)) {
-                    printf("correct! %s's score is now: %d \n", name, p.score);
+                    printf("Correct! %s's score is now: %d \n", name, p.score);
                 }
             }
         } else {
             for(int i = 0; i < NUM_PLAYERS; i++) {
                 player p = players[i];
                 if(strstr(p.name, name)) {
-                    printf("incorrect, %s's score is still: %d \n", name, p.score);
+                    printf("%s's score is still: %d \n", name, p.score);
                 }
             }
         }
@@ -165,8 +165,6 @@ int main()
 
         counter++;
 
-        // Call functions from the questions and players source files
-        // Execute the game until all questions are answered
         // Display the final results and exit
         if(counter >= 12){
             show_results(players, NUM_PLAYERS);
@@ -210,6 +208,8 @@ void show_results(player *players, int num_players) {
     for(int i = 0; i < num_players; i++) {
         printf("%d. %s - %d\n", i+1, players[i].name, players[i].score);
     }
+
+    printf("%s wins!", players[0].name);
 }
 
 // swap for bubble sort

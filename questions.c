@@ -149,6 +149,8 @@ bool valid_answer(char *category, int value, char *answer)
             questions[i] = q;
             if(strstr(q.answer, answer)) {
                 return true;
+            } else {
+                printf("Incorrect, the correct answer is: %s\n", q.answer);
             }
         }
     }
