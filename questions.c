@@ -138,10 +138,12 @@ bool valid_answer(char *category, int value, char *answer)
     for(int i = 0; i < NUM_QUESTIONS; i++) {
         question q = questions[i];
         if(strstr(category, q.category) && q.value == value) {
+            q.answered = true;
             if(strstr(q.answer, answer)) {
-                q.answered = true;
                 questions[i] = q;
                 return true;
+            }else {
+                printf("nice try but incorrect, the correct answer was %s \n", q.answer);
             }
         }
     }

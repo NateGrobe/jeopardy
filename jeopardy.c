@@ -131,13 +131,9 @@ int main()
             for(int i = 0; i < NUM_PLAYERS; i++) {
                 player p = players[i];
                 if(strstr(p.name, name)) {
-                    printf("correct! %s", name);
-                    printf("'s score is now: %d", p.score);
-                    printf("\n");
+                    printf("correct! %s's score is now: %d \n", name, p.score);
                 }
             }
-            
-            
         }
 
         free(answer);
