@@ -48,6 +48,7 @@ int main()
     for(int i = 0; i < NUM_PLAYERS; i++) {
         char *name = calloc(256, sizeof(char));
         player p;
+        p.score = 0;
         printf("Enter player %d's name: ", i+1);
         scanf("%s", name);
         strcpy(p.name, name);
@@ -131,8 +132,15 @@ int main()
         // print if the answer is correct
         if (valid_answer(category, value, cleaned_answer))
         {
-            printf("Correct!\n");
-            update_score(players, NUM_PLAYERS, name, value);
+            for(int i = 0; i < NUM_PLAYERS; i++) {
+                player p = players[i];
+                if(strstr(p.name, name)) {
+                    int currentScore = update_score(players, NUM_PLAYERS, name, value);
+                    printf("correct! ", p.name , "'s score is now:" + currentScore ," \n");
+                }
+            }
+            
+            
         }
 
         free(answer);
