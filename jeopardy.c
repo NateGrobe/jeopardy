@@ -63,7 +63,7 @@ int main()
     
     int counter = 0;
     // Perform an infinite loop getting command input from users until game ends
-    while (fgets(buffer, BUFFER_LEN, stdin) != NULL)
+    while (true)
     {
 
         char *name = calloc(256, sizeof(char));
@@ -91,12 +91,16 @@ int main()
              break;
             }
         }
+
         while (true){
+            char *v = calloc(BUFFER_LEN, sizeof(char));
             printf("What value do you want, %s?\n", name);
-            scanf(" %d", &value);
+            scanf("%s", v);
+            value = atoi(v);
             if(value == 100|| value == 200 || value == 300 || value == 400){
                 break;
             }
+            free(v);
         }
     
 
@@ -126,6 +130,8 @@ int main()
             } else {
                 printf("Please answer using \"who is\" or \"what is\"!\n");
             }
+
+            free(tokens);
         }
 
         // print if the answer is correct
@@ -138,7 +144,7 @@ int main()
                     printf("correct! %s's score is now: %d \n", name, p.score);
                 }
             }
-        }else {
+        } else {
             for(int i = 0; i < NUM_PLAYERS; i++) {
                 player p = players[i];
                 if(strstr(p.name, name)) {
@@ -148,7 +154,8 @@ int main()
         }
 
         free(answer);
-        counter++;
+        free(name);
+        free(category);
 
         // Call functions from the questions and players source files
         // Execute the game until all questions are answered
@@ -192,7 +199,7 @@ void show_results(player *players, int num_players) {
     bubble_sort(players);
 
     for(int i = 0; i < num_players; i++) {
-        printf("%d. %s", i, players[i].name);
+        printf("%d. %s - %d\n", i+1, players[i].name, players[i].score);
     }
 }
 
@@ -205,7 +212,7 @@ void swap(player *a, player *b) {
 void bubble_sort(player *arr) {
     for(int i = 0; i < NUM_PLAYERS; i++){
         for(int j = 0; j < NUM_PLAYERS - i - 1; j++) {
-            if(arr[j].score > arr[j+1].score) {
+            if(arr[j].score < arr[j+1].score) {
                 swap(&arr[j], &arr[j+1]);
             }
         }
