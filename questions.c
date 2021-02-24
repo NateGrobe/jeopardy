@@ -157,4 +157,5 @@ bool already_answered(char *category, int value)
             return q.answered; 
         }
     }
+    // return false;
 }
