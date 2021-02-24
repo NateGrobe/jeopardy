@@ -13,6 +13,12 @@
 // Returns true if the player name matches one of the existing players
 bool player_exists(player *players, int num_players, char *name)//TODO
 {
+    for(int i = 0; i < num_players; i++) {
+        player p = players[i];
+        if(strstr(p.name, name)) {
+            return true;
+        }
+    }
     return false;
 }
 

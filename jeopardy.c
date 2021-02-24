@@ -62,25 +62,20 @@ int main()
     // Perform an infinite loop getting command input from users until game ends
     while (fgets(buffer, BUFFER_LEN, stdin) != NULL)
     {
-        srand(time(0));
-        display_categories();
 
         char *name = calloc(256, sizeof(char));
-        name = players[rand() % 4].name;
         char *category = calloc(256, sizeof(char));
 
-        /*
         while (true) {
-            char *c_player = calloc(BUFFER_LEN, sizeof(char));
             printf("Enter the current player: ");
-            scanf("%s", c_player);
-            if(player_exists(players, NUM_PLAYERS, c_player)) {
+            scanf("%s", name);
+            if(player_exists(players, NUM_PLAYERS, name)) {
                 break;
             }
-            printf("There is no player name %s", c_player);
-            free(c_player);
+            printf("There is no player named %s", name);
         }
-        */
+
+        display_categories();
 
         int value;
         //Keeps asking for category and value till one that has not been chosen is picked
