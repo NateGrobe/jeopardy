@@ -24,13 +24,18 @@ bool player_exists(player *players, int num_players, char *name)
 
 // Go through the list of players and update the score for the 
 // player given their name
+<<<<<<< HEAD
 int update_score(player *players, int num_players, char *name, int score)
+=======
+void update_score(player *players, int num_players, char *name, int score)//TODO
+>>>>>>> 2e45c9a94995f3f612c849bbef6a11b8c0047db5
 {
     for(int i = 0; i < num_players; i++) {
         player p = players[i];
         if(strstr(p.name, name)) {
             p.score += score;
-            return p.score;
+            players[i] = p;
+            // return p.score;
         }
     }
 }

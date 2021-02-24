@@ -127,11 +127,18 @@ int main()
         // print if the answer is correct
         if (valid_answer(category, value, cleaned_answer))
         {
+            update_score(players, NUM_PLAYERS, name, value);
             for(int i = 0; i < NUM_PLAYERS; i++) {
                 player p = players[i];
                 if(strstr(p.name, name)) {
-                    int currentScore = update_score(players, NUM_PLAYERS, name, value);
-                    printf("correct! ", p.name , "'s score is now:" + currentScore ," \n");
+                    printf("correct! %s's score is now: %d \n", name, p.score);
+                }
+            }
+        }else {
+            for(int i = 0; i < NUM_PLAYERS; i++) {
+                player p = players[i];
+                if(strstr(p.name, name)) {
+                    printf("incorrect, %s's score is still: %d \n", name, p.score);
                 }
             }
         }
