@@ -142,8 +142,6 @@ bool valid_answer(char *category, int value, char *answer)
             if(strstr(q.answer, answer)) {
                 questions[i] = q;
                 return true;
-            }else {
-                printf("nice try but incorrect, the correct answer was %s \n", q.answer);
             }
         }
     }

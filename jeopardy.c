@@ -134,6 +134,13 @@ int main()
                     printf("correct! %s's score is now: %d \n", name, p.score);
                 }
             }
+        }else {
+            for(int i = 0; i < NUM_PLAYERS; i++) {
+                player p = players[i];
+                if(strstr(p.name, name)) {
+                    printf("incorrect, %s's score is still: %d \n", name, p.score);
+                }
+            }
         }
 
         free(answer);
