@@ -66,9 +66,11 @@ int main()
     while (true)
     {
 
+        // initialize name and category and allocate memroy
         char *name = calloc(256, sizeof(char));
         char *category = calloc(256, sizeof(char));
 
+        // get the player whos turn it is, validate it and display error message if appropriate
         while (true) {
             printf("Enter the current player: ");
             scanf("%s", name);
@@ -78,6 +80,7 @@ int main()
             printf("There is no player named %s \n", name);
         }
 
+        // display categories
         display_categories();
 
         int value;
@@ -103,18 +106,20 @@ int main()
             free(v);
         }
     
-
+        // restarts the questions selection loop
         if(already_answered(category, value) == true)
         {
             printf("That question has been answered\n");
             goto ASK;
         }
+
         //shows question and checks for the answer
         display_question(category, value);
 
         char *answer = calloc(BUFFER_LEN, sizeof(char));
         char *cleaned_answer = calloc(BUFFER_LEN, sizeof(char));
 
+        // reads in answer, tokenizes it and validates that it has who is or what is as well as yes or no
         while (true) {
             char **tokens = calloc(BUFFER_LEN, sizeof(char*));
             scanf("\n%[^\n]c", answer);
@@ -153,9 +158,12 @@ int main()
             }
         }
 
+        // free memory
         free(answer);
         free(name);
         free(category);
+
+        counter++;
 
         // Call functions from the questions and players source files
         // Execute the game until all questions are answered
@@ -169,7 +177,7 @@ int main()
     return EXIT_SUCCESS;
 }
 
-// write complete instructions here
+// displays instructions
 void display_instructions() {
     printf("Instructions:\n");
     printf("Firstly, enter all 4 players names.\n\nThen enter the category and dollar amount of question.\n\n");
@@ -195,6 +203,7 @@ void tokenize(char *input, char **tokens) {
     }
 }
 
+// displays final game results
 void show_results(player *players, int num_players) {
     bubble_sort(players);
 
@@ -203,12 +212,14 @@ void show_results(player *players, int num_players) {
     }
 }
 
+// swap for bubble sort
 void swap(player *a, player *b) {
     player temp = *a;
     *a = *b;
     *b = temp;
 }
 
+// bubble sort implementation
 void bubble_sort(player *arr) {
     for(int i = 0; i < NUM_PLAYERS; i++){
         for(int j = 0; j < NUM_PLAYERS - i - 1; j++) {
