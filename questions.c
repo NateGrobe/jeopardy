@@ -117,7 +117,6 @@ void display_categories(void)
     // print categories and dollar values for each unanswered question in questions array
     printf("Algorithms   Programming   Databases\n");
     for(int i = 0; i < NUM_QUESTIONS; i += 3) {
-        int q1, q2, q3;
         if(questions[i].answered) printf("   %s   ", "   ");
         else printf("   %d   ", questions[i].value);
 
@@ -166,5 +165,5 @@ bool already_answered(char *category, int value)
             return q.answered; 
         }
     }
-    // return false;
+    return false;
 }
