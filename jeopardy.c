@@ -75,7 +75,7 @@ int main()
             if(player_exists(players, NUM_PLAYERS, name)) {
                 break;
             }
-            printf("There is no player named %s", name);
+            printf("There is no player named %s \n", name);
         }
 
         display_categories();
@@ -162,6 +162,10 @@ int main()
         // Display the final results and exit
         if(counter >= 12){
             show_results(players, NUM_PLAYERS);
+<<<<<<< HEAD
+            printf("");
+=======
+>>>>>>> 34d4024849b9fb0ece32841f9ae1a6d15e36d00b
             break;
         }
 
