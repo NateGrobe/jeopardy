@@ -31,6 +31,10 @@ void str_lower_case(char *str);
 
 void display_instructions();
 
+void bubble_sort(player *arr);
+
+void swap(player *a, player *b);
+
 int main()
 {
     // An array of 4 players, may need to be a pointer if you want it set dynamically
@@ -151,7 +155,10 @@ int main()
         // Display the final results and exit
         if(counter >= 12){
             show_results(players, NUM_PLAYERS);
+<<<<<<< HEAD
             printf("");
+=======
+>>>>>>> 34d4024849b9fb0ece32841f9ae1a6d15e36d00b
             break;
         }
 
@@ -182,5 +189,29 @@ void tokenize(char *input, char **tokens) {
     while(token != NULL) {
         tokens[c++] = token;
         token = strtok(NULL, " ");
+    }
+}
+
+void show_results(player *players, int num_players) {
+    bubble_sort(players);
+
+    for(int i = 0; i < num_players; i++) {
+        printf("%d. %s", i, players[i].name);
+    }
+}
+
+void swap(player *a, player *b) {
+    player temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void bubble_sort(player *arr) {
+    for(int i = 0; i < NUM_PLAYERS; i++){
+        for(int j = 0; j < NUM_PLAYERS - i - 1; j++) {
+            if(arr[j].score > arr[j+1].score) {
+                swap(&arr[j], &arr[j+1]);
+            }
+        }
     }
 }

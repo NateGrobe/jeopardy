@@ -31,7 +31,6 @@ void update_score(player *players, int num_players, char *name, int score)//TODO
         if(strstr(p.name, name)) {
             p.score += score;
             players[i] = p;
-            // return p.score;
         }
     }
 }
