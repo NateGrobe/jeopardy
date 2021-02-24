@@ -140,6 +140,7 @@ bool valid_answer(char *category, int value, char *answer)
         if(strstr(category, q.category) && q.value == value) {
             if(strstr(q.answer, answer)) {
                 q.answered = true;
+                questions[i] = q;
                 return true;
             }
         }
