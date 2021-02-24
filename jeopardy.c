@@ -67,6 +67,20 @@ int main()
         char *name = calloc(256, sizeof(char));
         name = players[rand() % 4].name;
         char *category = calloc(256, sizeof(char));
+
+        /*
+        while (true) {
+            char *c_player = calloc(BUFFER_LEN, sizeof(char));
+            printf("Enter the current player: ");
+            scanf("%s", c_player);
+            if(player_exists(players, NUM_PLAYERS, c_player)) {
+                break;
+            }
+            printf("There is no player name %s", c_player);
+            free(c_player);
+        }
+        */
+
         int value;
         //Keeps asking for category and value till one that has not been chosen is picked
         ASK:
@@ -114,13 +128,14 @@ int main()
             }
         }
 
+        // print if the answer is correct
         if (valid_answer(category, value, cleaned_answer))
         {
             printf("Correct!\n");
             update_score(players, NUM_PLAYERS, name, value);
         }
+
         free(answer);
-        //free(cleaned_answer);
         counter++;
 
         // Call functions from the questions and players source files
