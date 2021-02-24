@@ -139,7 +139,7 @@ int main()
             free(tokens);
         }
 
-        // print if the answer is correct and display answer if incorrect
+        // print if the answer is correct and display score. display answer if incorrect
         if (valid_answer(category, value, cleaned_answer))
         {
             update_score(players, NUM_PLAYERS, name, value);
